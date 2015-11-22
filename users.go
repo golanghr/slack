@@ -101,9 +101,10 @@ func (api *Client) GetUserInfo(user string) (*User, error) {
 }
 
 // GetUsers returns the list of users (with their detailed information)
-func (api *Client) GetUsers() ([]User, error) {
+func (api *Client) GetUsers(presence bool) ([]User, error) {
 	values := url.Values{
 		"token": {api.config.token},
+		"presence": {presence},
 	}
 	response, err := userRequest("users.list", values, api.debug)
 	if err != nil {
